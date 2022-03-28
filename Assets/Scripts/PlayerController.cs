@@ -12,21 +12,29 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        score = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
     }
     // Update is called once per frame
     void Update()
     {
+        // changing gravity 
         if(Input.GetKeyDown(KeyCode.Space))
         {
             //rb.AddForce(Vector3.up * playerJumpForce);
-            Physics.gravity *= -1;
+            Physics.gravity *= -1;          
         }
+        // updating score using player distance
+        score.ScoreUpdate((int)rb.transform.position.x);
     }
+
+    // player forward movement
     private void FixedUpdate()
     {
         rb.velocity = new Vector3(playerSpeed, rb.velocity.y, rb.velocity.z);
     }
-    private void OnTriggerExit(Collider other)
+
+    // destroying player when collides with obstacle
+    private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.GetComponent<ObstacleCollider>() != null)
         {

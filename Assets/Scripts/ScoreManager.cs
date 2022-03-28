@@ -8,14 +8,12 @@ public class ScoreManager : MonoBehaviour
     private int score;
     public Text scoreText;
 
-    void Start()
-    {
-        
-    }
+ 
     public void ScoreUpdate(int scoreValue)
     {
-        score = score + scoreValue;
-        Debug.Log("Score :" + score);
+        scoreText.text = score.ToString();
+        score =  scoreValue;
+        //Debug.Log("Score :" + score);
     }
    
 }
